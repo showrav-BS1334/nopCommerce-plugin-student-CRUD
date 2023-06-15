@@ -1,0 +1,29 @@
+﻿@using Nop.Plugin.Widgets.StudentCRUD.Models
+@model IEnumerable<StudentModel>
+
+@{
+    Layout = "";
+}
+
+<div>
+    <div>
+        <h5>For student CRUD operations, goto admin panel. Here is the table: </h5>
+        <br>
+        <br>
+        <table style="font-size:large">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+            @{
+                foreach (var student in Model)
+                {
+                    <tr>
+                        <td>@student.Name</td>
+                        <td>@student.Age</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

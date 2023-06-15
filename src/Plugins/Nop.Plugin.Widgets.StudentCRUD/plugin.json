@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Student CRUD",
+  "SystemName": "Widgets.StudentCRUD",
+  "Version": "1.51",
+  "SupportedVersions": [ "4.60" ],
+  "Author": "BS23",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.StudentCRUD.dll",
+  "Description": "This plugin will show some text in home-index!"
+}

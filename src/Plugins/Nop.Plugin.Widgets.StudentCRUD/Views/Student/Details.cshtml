@@ -1,0 +1,13 @@
+﻿@using Nop.Plugin.Widgets.StudentCRUD.Models
+@model StudentModel
+
+@{
+    Layout = "_ConfigurePlugin";
+    ViewData["Title"] = "Details";
+    NopHtml.SetActiveMenuItemSystemName("Widgets.StudentCRUD");
+
+}
+
+<div class="home">
+    <h3>Book: @Model.Name</h3>
+</div>

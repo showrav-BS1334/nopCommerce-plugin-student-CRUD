@@ -1,0 +1,186 @@
+﻿@using Nop.Plugin.Widgets.StudentCRUD.Models
+@model StudentModel
+
+@{
+    Layout = "_AdminPopupLayout";
+    NopHtml.SetActiveMenuItemSystemName("Widgets.StudentCRUD");
+
+}
+
+<script>
+    console.log("eikhane first e asbe");
+</script>
+
+@if (ViewBag.RefreshPage == true)
+{
+    <script>
+        //console.log("RefreshPage ekhon true");
+
+        //let allForms = window.opener.document.forms;
+        //console.log(allForms);
+        //for (let i = 0; i < fallForms.length; i++) {
+        //    console.log(allForms[i].id);
+        //    console.log("\n");
+        //}
+
+        //let divs = document.querySelectorAll("div");
+        //let targetedDiv;
+        //divs.forEach(function (div) {
+        //    if (div.id == "student-form") {
+
+        //    }
+        //    console.log(div);
+        //});
+
+
+        try {
+            window.opener.document.getElementById("@(Context.Request.Query["btnId"])").click();
+        }
+        catch (e) { }
+        window.close();
+
+                        // try { window.opener.document.forms['@(Context.Request.Query["formId"])'].@(Context.Request.Query["btnId"]).click(); }
+                        //catch (e) { }
+                        //window.close();
+    </script>
+}
+
+
+<form asp-controller="Student" asp-action="Create"
+      asp-route-btnId="@Context.Request.Query["btnId"]"
+      asp-route-formId="@Context.Request.Query["formId"]">
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="content-header clearfix">
+                <h1 class="float-left">
+                    @T("Admin.Catalog.Products.TierPrices.AddNew")
+                </h1>
+                <div class="float-right">
+                    <button type="submit" name="save" class="btn btn-primary">
+                        <i class="far fa-save"></i>
+                        @T("Admin.Common.Save")
+                    </button>
+                    @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.ProductTierPriceDetailsButtons, additionalData = Model })
+                </div>
+            </div>
+
+            @*@await Html.PartialAsync("_CreateOrUpdateTierPrice", Model)*@
+
+
+
+@*            <section class="content">
+                <div class="container-fluid">
+                    <div class="form-horizontal">
+                        <div class="form-horizontal">
+                            <div class="cards-group">
+                                @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.ProductTierPriceDetailsTop, additionalData = Model })
+                                <div class="card card-default card-popup">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <nop-label asp-for="Name" />
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <nop-editor asp-for="Name" />
+                                                <span asp-validation-for="Name"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <nop-label asp-for="Age" />
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <nop-editor asp-for="Age" />
+                                                <span asp-validation-for="Age"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <nop-label asp-for="Mail" />
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <nop-select asp-for="Mail" />
+                                                <span asp-validation-for="Mail"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <nop-label asp-for="Department" />
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <nop-editor asp-for="Department" />
+                                                <span asp-validation-for="Department"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <nop-label asp-for="Gender" />
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <nop-editor asp-for="Gender" />
+                                                <span asp-validation-for="Gender"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @await Component.InvokeAsync(typeof(AdminWidgetViewComponent), new { widgetZone = AdminWidgetZones.ProductTierPriceDetailsBottom, additionalData = Model })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>*@
+
+
+            @(await Html.LocalizedEditorAsync<StudentModel, StudentLocalizedModel>("student-localized",
+                @<div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="@Model.Locales[item].Name" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="@Model.Locales[item].Name" />
+                            <span asp-validation-for="@Model.Locales[item].Name"></span>
+                        </div>
+                    </div>
+@*                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="@Model.Locales[item].Age" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="@Model.Locales[item].Age"/>
+                            <span asp-validation-for="@Model.Locales[item].Age"></span>
+                        </div>
+                    </div>*@
+                    <input type="hidden" asp-for="@Model.Locales[item].LanguageId" />
+                </div>
+                ,
+                @<div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="Name" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="Name" asp-required="true" />
+                            <span asp-validation-for="Name"></span>
+                        </div>
+                    </div>
+@*                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="Age" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="Age" asp-required="true" />
+                            <span asp-validation-for="Age"></span>
+                        </div>
+                    </div>*@
+                </div>))
+
+
+        </div>
+    </section>
+</form>
+
+
+
+
